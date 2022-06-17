@@ -49,7 +49,7 @@ def send_email_file(file_attachment, file_name,
 
     try:
         to_addrs = _parse_to_addrs_string_to_list(send_to)
-        msg = _create_mime_msg(subject, send_to)
+        msg = _create_mime_msg(subject, text)
         attachedfile = MIMEApplication(file_attachment)
         attachedfile.add_header(
             'Content-Disposition', f'attachment; filename="{file_name}.xlsx"',

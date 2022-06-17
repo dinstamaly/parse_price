@@ -2,9 +2,13 @@ __author__ = 'Dinmukhamed Stamaliev'
 
 import json
 
+from config.settings import driver
 from mailing import send_email_file
 from report import get_report_file
 from service import make_request, get_difference
+
+
+
 
 
 def make_json_file():
@@ -21,7 +25,7 @@ def make_json_file():
         data=json.dumps({
             'offerStatus': "ACTIVE",
             'start': 0,
-            'count': 60
+            'count': 100
         })
 
     )
@@ -30,12 +34,12 @@ def make_json_file():
     return request.json()
 
 
-# data = make_json_file()
-# send_email_file(
-#     file_attachment=get_report_file(data['offers']),
-#     file_name='test',
-#     subject='product',
-#     send_to='chikuplusdin@gmail.com',
-#     text='test'
-# )
-get_difference()
+data = make_json_file()
+send_email_file(
+    file_attachment=get_report_file(data['offers']),
+    file_name='ExcelFormatTemplate',
+    subject='product',
+    send_to='chikuplusdin@gmail.com',
+    text='test'
+)
+driver.quit()
