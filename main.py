@@ -8,9 +8,6 @@ from report import get_report_file
 from service import make_request, get_difference
 
 
-
-
-
 def make_json_file():
     s = make_request()
     headers2 = {
@@ -25,7 +22,7 @@ def make_json_file():
         data=json.dumps({
             'offerStatus': "ACTIVE",
             'start': 0,
-            'count': 100
+            'count': 200
         })
 
     )

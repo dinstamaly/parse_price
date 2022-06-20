@@ -1,7 +1,5 @@
 __author__ = 'Dinmukhamed Stamaliev'
 
-import json
-
 import requests
 from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
@@ -29,43 +27,6 @@ def make_request():
         data=data
     )
     return s
-
-
-def upload_file():
-    s = make_request()
-    headers2 = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36",
-        'Content-Type': 'application/json',
-    }
-    product_url = 'https://kaspi.kz/merchantcabinet/api/offer/upload'
-    request = s.post(
-        product_url,
-        headers=headers2,
-        cookies=s.cookies.get_dict(),
-        # data=json.dumps(
-        #     {
-        #         "cityId": "750000000",
-        #         "id": "100883228",
-        #         # "merchantUID":null,
-        #         "limit": 5,
-        #         "page": 0,
-        #         "sort": True,
-        #         "product": {
-        #             "brand": "California Gold Nutrition",
-        #             "categoryCodes": [
-        #                 "Vitamins",
-        #                 "Pharmacy",
-        #                 "Categories"
-        #             ],
-        #             "baseProductCodes": [],
-        #             "groups": []
-        #         },
-        #         "installationId": "-1"}
-        # )
-
-    )
-    print(request.text)
-    return request
 
 
 def get_difference(url):

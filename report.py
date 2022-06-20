@@ -42,6 +42,7 @@ def get_report_file(data):
     diff_style = workbook.add_format(
         {
             'bold': False, 'border': 0, 'align': 'center',
+            # 'text_wrap': True,
         }
     )
     diff_color_style = workbook.add_format(
@@ -72,6 +73,7 @@ def get_report_file(data):
     ]
 
     diff_columns = [
+        'link',
         'initial price',
         'difference',
         'market name',
@@ -88,9 +90,9 @@ def get_report_file(data):
     worksheet.set_column('B:B', 65)
     worksheet.set_column('C:C', 25)
     worksheet.set_column('D:J', 17)
-    worksheet.set_column('L:L', 17)
+    worksheet.set_column('L:L', 15)
     worksheet.set_column('M:M', 20)
-    worksheet.set_column('N:O', 17)
+    worksheet.set_column('N:P', 17)
 
     for i, tr in enumerate(data, start=1):
         data_dict = get_min_value(tr["masterProduct"]["productUrl"],
@@ -106,20 +108,22 @@ def get_report_file(data):
         worksheet.write(i, 7, 'no', content_style)
         worksheet.write(i, 8, 'no', content_style)
         worksheet.write(i, 9, '', content_style)
+        worksheet.write_url(i, 11, tr["masterProduct"]["productUrl"], string='link')
         if data_dict:
-            worksheet.write(i, 12, data_dict['difference'], diff_style)
-            worksheet.write(i, 13, data_dict['name'], diff_style)
-            worksheet.write(i, 14, data_dict['price'], diff_style)
+            worksheet.write(i, 12, '', diff_style)
+            worksheet.write(i, 13, data_dict['difference'], diff_style)
+            worksheet.write(i, 14, data_dict['name'], diff_style)
+            worksheet.write(i, 15, data_dict['price'], diff_style)
             if data_dict['difference'] > 1:
-                worksheet.write(i, 11, price, diff_style)
-                worksheet.write(i, 12, data_dict['difference'],
+                worksheet.write(i, 12, price, diff_style)
+                worksheet.write(i, 13, data_dict['difference'],
                                 diff_color_style)
                 worksheet.write(i, 3, data_dict['price'] - 1,
                                 content_style)
 
             if -1 >= data_dict['difference'] >= -10:
-                worksheet.write(i, 11, price, diff_style)
-                worksheet.write(i, 12, data_dict['difference'],
+                worksheet.write(i, 12, price, diff_style)
+                worksheet.write(i, 13, data_dict['difference'],
                                 diff_negative_style)
                 worksheet.write(i, 3, data_dict['price'] - 1,
                                 content_style)
