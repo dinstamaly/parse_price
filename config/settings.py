@@ -18,8 +18,8 @@ SMTP = {
 }
 
 MAIL = {
-    'username': 'studilimedu@gmail.com',
-    'password': 'uaddlvfhddiukgdd',
+    'username': 'chikuplusdin@gmail.com',
+    'password': 'eaphgctknmcxwmvg',
 }
 
 PROF_INFO = {
